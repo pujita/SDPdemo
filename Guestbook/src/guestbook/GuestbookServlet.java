@@ -14,8 +14,9 @@ public class GuestbookServlet extends HttpServlet {
         User user = userService.getCurrentUser();
 
         if (user != null) {
-            resp.setContentType("text/plain");
+            resp.setContentType("text/html");
             resp.getWriter().println("Hello, " + user.getNickname());
+            resp.getWriter().println("<br /><a href = " + userService.createLogoutURL(req.getRequestURI()) +">Sign out </a>" );
         } else {
             resp.sendRedirect(userService.createLoginURL(req.getRequestURI()));
         }
